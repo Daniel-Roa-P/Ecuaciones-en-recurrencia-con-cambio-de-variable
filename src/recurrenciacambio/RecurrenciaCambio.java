@@ -23,8 +23,8 @@ public class RecurrenciaCambio extends JFrame implements ActionListener {
     JLabel texto4 = new JLabel("F(2) =                                      (solo para el tercer caso)");
     JLabel solucion = new JLabel();
     
-    JTextField tf1 = new JTextField("2");
-    JTextField tf2 = new JTextField("3");
+    JTextField tf1 = new JTextField("3");
+    JTextField tf2 = new JTextField("13");
     JTextField tf3 = new JTextField();
     
     ButtonGroup  bg = new ButtonGroup();
@@ -37,13 +37,15 @@ public class RecurrenciaCambio extends JFrame implements ActionListener {
     JScrollPane scrollPane = new JScrollPane();
     JScrollPane scrollPane1 = new JScrollPane();
     
+    Casos caso;
+    
     double a,b,f;
     
     public static void main(String[] args) {
         
        RecurrenciaCambio rc = new RecurrenciaCambio();
-       rc.setBounds(500, 0, 350, 700);
-       rc.setTitle("Ecuaciones en recurrencia con cambio de variable");
+       rc.setBounds(500, 0, 350, 400);
+       rc.setTitle("Recurrencias con cambio de variable");
        rc.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
        rc.setVisible(true);
         
@@ -106,31 +108,39 @@ public class RecurrenciaCambio extends JFrame implements ActionListener {
         
     }
     
+    public void mostrarResultado(){
+        
+        scrollPane.removeAll();
+         
+        a = Double.parseDouble(tf1.getText());
+        b = Double.parseDouble(tf2.getText());
+
+        solucion.setText(caso.obtenerFormula(a, b));
+        solucion.setBounds(2, 2, 500, 30);
+
+        scrollPane.add(solucion);
+        scrollPane.repaint();
+
+        scrollPane1.setViewportView(scrollPane);
+            
+    }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         
         if(e.getSource() == boton && rb1.isSelected()){
-        
-            scrollPane.removeAll();
-            
+
             System.out.println("primer caso");
             
-            a = Double.parseDouble(tf1.getText());
-            b = Double.parseDouble(tf2.getText());
-            
-            CasoUno c1 = new CasoUno(a, b);
-
-            solucion.setText(c1.obtenerFormula());
-            solucion.setBounds(2, 2, 500, 30);
-            
-            scrollPane.add(solucion);
-            scrollPane.repaint();
-
-            scrollPane1.setViewportView(scrollPane);
+            caso = new CasoUno();
+            mostrarResultado();
             
         } else if(e.getSource() == boton && rb2.isSelected()){
         
-           System.out.println("segundo caso"); 
+           System.out.println("segundo caso");
+            
+           caso = new CasoDos();
+           mostrarResultado();
             
         } else if(e.getSource() == boton && rb3.isSelected()){
         
