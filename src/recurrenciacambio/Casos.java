@@ -11,6 +11,7 @@ public abstract class Casos {
     protected double [] raices = new double[2];
     protected double [] coeficientes = new double[2];
     protected double [] [] matriz = new double [2][2];
+    protected double [] [] copiaMatriz = new double [2][2];
     protected DecimalFormat formato = new DecimalFormat("###.####");
     
     public double[] eliminacionGauss(double[][] A, double[] b) {
@@ -74,6 +75,7 @@ public abstract class Casos {
     }
     
     protected abstract String obtenerFormula (double a, double b);    
+    protected abstract String obtenerProcedimiento (double a, double b);  
     protected abstract void calcularMatriz ();
     protected abstract double calcularInicial();
     
